@@ -40,12 +40,7 @@
               <li><a href="#">Login</a></li>
 
             </ul>
-            <form class="navbar-form navbar-left" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-              </div>
-              <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#"></a></li>
 
@@ -54,12 +49,62 @@
         </div><!-- /.container-fluid -->
       </nav>
 
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Last/Company Name</th>
+              <th>First Name</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Zip</th>
+              <th>Email</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+              <?php // query.php
+
+                // require_once 'login.php';
+
+                // login.php
+                $hn = 'www.it354.com';
+                $db = 'it354_students';
+                $un = 'it354_students';
+                $pw = 'steinway';
+
+                $conn = new mysqli($hn, $un, $pw, $db);
+                if ($conn->connect_error){
+                  die($conn->connect_error);
+                }
 
 
-        <table class="table">
-          <tr>
-            <th>ID</th>
-          </tr>          
+                $query = "SELECT * FROM customers";
+                $result = $conn->query($query);
+                if (!$result) die($conn->error);
+
+                $rows = $result->num_rows;
+
+                for ($j = 0 ; $j < $rows ; ++$j)
+                {
+                  $result->data_seek($j);
+                  $row = $result->fetch_array(MYSQLI_ASSOC);
+
+                  echo $row['firstName'] . '<br>';
+                  echo $row['lastName'] . '<br>';
+                	echo $row['address'] . '<br>';
+                  echo $row['city'] . '<br>';
+                	echo $row['state'] . '<br>';
+                	echo $row['zip'] . '<br>';
+                	echo $row['email'] . '<br>';
+                	echo $row['phone'] . '<br><br>';
+                }
+
+                $result->close();
+                $conn->close();
+            ?>
+          </tbody>
         </table>
   </div>
 
@@ -69,6 +114,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>
-<?php
-echo date(l);
-?>
