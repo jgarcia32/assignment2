@@ -87,21 +87,23 @@
                 if (!$result) die($conn->error);
 
                 $rows = $result->num_rows;
-
+                $id = 1;
                 for ($j = 0 ; $j < $rows ; ++$j)
                 {
-                  $result->data_seek($j);
-                  $row = $result->fetch_array(MYSQLI_ASSOC);
+                   $result->data_seek($j);
+                   $row = $result->fetch_array(MYSQLI_ASSOC);
 
-                  echo 'First name: ' . $row['firstName'] . '<br>';
-                  echo 'Last/Company Name: ' . $row['lastName'] . '<br>';
-                	echo 'Address: ' . $row['address'] . '<br>';
-                  echo 'City: ' . $row['city'] . '<br>';
-                	echo 'State: ' .  $row['state'] . '<br>';
-                	echo 'Zip: ' . $row['zip'] . '<br>';
-                	echo 'Email: ' . $row['email'] . '<br>';
-                	echo 'Phone: ' . $row['phone'] . '<br><br>';
-                }
+                   echo "<tr><td>" . $id . '';
+                   echo "<td>" . $row['lastName'] . '<br>';
+                   echo "<td>" . $row['firstName'] . '<br>';
+                   echo "<td>" . $row['address'] . '<br>';
+                   echo "<td>" . $row['city'] . '<br>';
+                   echo "<td>" .  $row['state'] . '<br>';
+                   echo "<td>" . $row['zip'] . '<br>';
+                   echo "<td>" . $row['email'] . '<br>';
+                   echo "<td>" . $row['phone'] . '</tr>';
+                   $id = $id +1;
+                }   
 
                 $result->close();
                 $conn->close();
