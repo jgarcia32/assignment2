@@ -66,9 +66,9 @@
           <tbody>
               <?php // query.php
 
-                // require_once 'login.php';
+                 //require_once 'login.php';
 
-                // login.php
+                 //login.php
                 $hn = 'www.it354.com';
                 $db = 'it354_students';
                 $un = 'it354_students';
@@ -76,12 +76,14 @@
 
                 $conn = new mysqli($hn, $un, $pw, $db);
                 if ($conn->connect_error){
-                  die($conn->connect_error);
+                  die("connection failed. " );
                 }
 
+                $query = "SELECT lastName, firstName, address, city,
+                  state, zip, email, phone FROM customers";
 
-                $query = "SELECT * FROM customers";
                 $result = $conn->query($query);
+
                 if (!$result) die($conn->error);
 
                 $rows = $result->num_rows;
@@ -91,14 +93,14 @@
                   $result->data_seek($j);
                   $row = $result->fetch_array(MYSQLI_ASSOC);
 
-                  echo $row['firstName'] . '<br>';
-                  echo $row['lastName'] . '<br>';
-                	echo $row['address'] . '<br>';
-                  echo $row['city'] . '<br>';
-                	echo $row['state'] . '<br>';
-                	echo $row['zip'] . '<br>';
-                	echo $row['email'] . '<br>';
-                	echo $row['phone'] . '<br><br>';
+                  echo 'First name: ' . $row['firstName'] . '<br>';
+                  echo 'Last/Company Name: ' . $row['lastName'] . '<br>';
+                	echo 'Address: ' . $row['address'] . '<br>';
+                  echo 'City: ' . $row['city'] . '<br>';
+                	echo 'State: ' .  $row['state'] . '<br>';
+                	echo 'Zip: ' . $row['zip'] . '<br>';
+                	echo 'Email: ' . $row['email'] . '<br>';
+                	echo 'Phone: ' . $row['phone'] . '<br><br>';
                 }
 
                 $result->close();
